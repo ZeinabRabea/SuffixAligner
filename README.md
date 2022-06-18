@@ -1,2 +1,2 @@
 # SuffixAligner
-SuffixAligner is a python-based aligner for long noisy reads generated from third-generation sequencing machines. 
+A Long Read Aligner Based on Suffix Array Construction Algorithm for DNA Alphabets 
