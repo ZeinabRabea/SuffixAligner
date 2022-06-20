@@ -2,8 +2,11 @@
 A Long Read Aligner Based on Suffix Array Construction Algorithm for DNA Alphabets 
 SuffixAligner
 SuffixAligner is a python-based aligner for long noisy reads generated from third-generation sequencing machines. SuffixAligner exploits the nature of biological alphabet that has a fixed-size and a predefined lexical ordering to construct a suffix array for indexing a reference genome. FM-index is used to efficiently search the indexed reference and locate the exact matched seeds among reads and the reference. The matched seeds are arranged into windows/clusters and the ones with the maximum number of seeds are reported as candidates for mapping positions, more details about SuffixAligner can be found in: 
+
 •	(Indexing) https://doi.org/10.1016/j.jksuci.2022.04.015
 •	(Mapping) 
+
+
 System requirements
 64-bit machine with python in general, numpy, and pandas libraries.
 
