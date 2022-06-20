@@ -89,7 +89,7 @@ The output of the step of mapping is sam file in the file:
 
             [R_file].[Start].[End].sam      when input is read file
 
-Or
+#### Or
 
             [Sam_file].[Start].[End].sam      when input is sam file
 
