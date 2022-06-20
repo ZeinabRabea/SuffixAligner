@@ -2,15 +2,16 @@
 <p align="justify">
 SuffixAligner is a python-based aligner for long noisy reads generated from third-generation sequencing machines. SuffixAligner exploits the nature of biological alphabet that has a fixed-size and a predefined lexical ordering to construct a suffix array for indexing a reference genome. FM-index is used to efficiently search the indexed reference and locate the exact matched seeds among reads and the reference. The matched seeds are arranged into windows/clusters and the ones with the maximum number of seeds are reported as candidates for mapping positions, more details about the algorithm used in the suffix array indexing stage for the SuffixAligner can be found in:          
 
-Rabea, Z.; El-Metwally, S.;Elmougy, S. and Zakaria,M.; [A fast algorithm for constructing suffix arrays for DNA alphabets](https://www.sciencedirect.com/science/article/pii/S1319157822001434) .Journal of King Saud University - Computer and Information Sciences; 2022.         
-           
-### System requirements
+Rabea, Z.; El-Metwally, S.;Elmougy, S. and Zakaria,M.; [A fast algorithm for constructing suffix arrays for DNA alphabets](https://www.sciencedirect.com/science/article/pii/S1319157822001434) .Journal of King Saud University - Computer and Information Sciences; 2022.  
+<br>
 
+Copyright (C) 2020-2022, and GNU GPL, by Zeinab Rabea, Sara El-Metwally,Samir Elmougy and Magdi Zakaria. </p>
+           
+### System Requirements
 64-bit machine with python in general, numpy, and pandas libraries.
 
 ### Installation
-1.	Downlowd files
-2.	Run code f5
+1. Clone the [GitHub repo](https://github.com/ZeinabRabea/SuffixAligner), e.g. with `git clone https://github.com/ZeinabRabea/SuffixAligner.git`
 
 # Quick usage guide
 
