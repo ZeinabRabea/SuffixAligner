@@ -10,10 +10,11 @@ Copyright (C) 2020-2022, and GNU GPL, by Zeinab Rabea, Sara El-Metwally,Samir El
 ### System Requirements
 64-bit machine with python in general, numpy, and pandas libraries.
 
-### Installation
+### Quick usage guide
 1. Clone the [GitHub repo](https://github.com/ZeinabRabea/SuffixAligner), e.g. with `git clone https://github.com/ZeinabRabea/SuffixAligner.git`
+2. For Indexing step,run `python Indexing.py` in the repo directory. 
+3. For Mapping step,run `python Mapping.py` in the repo directory. 
 
-# Quick usage guide
 ### Genome Indexing Stage: 
 1. Run `python Indexing.py` in the repo directory.
 
