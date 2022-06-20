@@ -12,10 +12,10 @@ Copyright (C) 2020-2022, and GNU GPL, by Zeinab Rabea, Sara El-Metwally,Samir El
 
 ### Installation
 1. Clone the [GitHub repo](https://github.com/ZeinabRabea/SuffixAligner), e.g. with `git clone https://github.com/ZeinabRabea/SuffixAligner.git`
+2. Run `python` in the repo directory.
 
 # Quick usage guide
-
-## Indexing: 
+### Genome Indexing Stage: 
 
 #### Run
 Find_SA_for_Genome(L=100,l=100,G_file='genome_file.fasta')    
