@@ -575,7 +575,7 @@ if __name__ == "__main__":
             print('Mapping.py s -G <Genome_file>  -S <Suffix_array_file>  -F <sam_file>  -B <begining_read>  -E <Ending_read> ')
         
             sys.exit()
-        elif opt == '-s'::
+        elif opt == '-s':
             Default_Type="s"
         elif opt in ("-G", "--Genome"):
             Default_G_file = arg
