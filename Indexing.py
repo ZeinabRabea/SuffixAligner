@@ -1,3 +1,4 @@
+import sys, getopt
 def Find_SA_for_Genome(L=100,l=100,G_file='example1.fasta'):    
 #Input:  G_file: Reference Genome File,  L: Divide genome to substrings of length L,   l : Overlap length.
 #Output:   suffix:Suffix Array
@@ -20,7 +21,7 @@ def Find_SA_for_Genome(L=100,l=100,G_file='example1.fasta'):
             i=i+1
     
     x=G_file+".SA.txt"
-    file_sufix_array = open(x, 'a')
+    file_sufix_array = open(x, 'w')
     file_sufix_array.write(str(SA_s[0]))
     file_sufix_array.close()
 
@@ -178,12 +179,29 @@ def Sorted_2_SA(X,Y,t,k2=50):
     return z
 
 if __name__ == "__main__":
-
-    Find_SA_for_Genome(L=100,l=100,G_file='example1.fasta')
+    argv = sys.argv[1:]
+    Length =100;
+    Overlap=100;
+    file='example1.fasta';
+    try:
+        opts, args = getopt.getopt(argv,"hL:G:",["Length=","Genome="])
+    except getopt.GetoptError:
+        print('Indexing.py -L <Substrings_Length> -G <Genome_file>')
+        sys.exit(2)
+    for opt, arg in opts:
+        if opt == '-h':
+            print('Indexing.py -L <Substrings_Length> -G <Genome_file>')
+            sys.exit()
+        elif opt in ("-L", "--Length"):
+            Length = int(arg)
+        elif opt in ("-G", "--Genome"):
+            file = arg
+            
+    Find_SA_for_Genome(L=Length,l=Overlap,G_file=file)
     """
     G_file: Reference Genome File default=example1.fasta
     L: Divide genome to substrings of length L default=100
-    l : Overlap length default=100
+    l : Overlap length =100
     """
      
 
