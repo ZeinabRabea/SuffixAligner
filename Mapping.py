@@ -422,18 +422,22 @@ def Mapping(Type="r",G_file="Acinetobacter_ref.fasta", R_file="ERR776852.fastq",
 
     if Type=="r":
         Result_file=R_file+"."+str(Start)+"."+str(End)+".sam"
-        g_sam_file = open(Result_file, 'a')
+        g_sam_file = open(Result_file, 'w')
         cl="Type:"+Type+".G_file:"+G_file+".R_file:"+R_file+".SA_file:"+SA_file+".Start:"+str(Start)+".End:"+str(End)
         print_sam_title(len(genome),cl)
 
         g_read,g_read_name,g_read_quality=load_read(R_file)
-        print("Number of read",len(g_read))    
+        print("Number of read",len(g_read))   
+        if Start==-1:
+            Start=0
+        if End==-1:
+            End=len(g_read)
         for i in range(Start,End,1)  :
           search_read(i)
           print("**")
     if Type=="s":
         Result_file=Sam_file+"."+str(Start)+"."+str(End)+".sam"
-        g_sam_file = open(Result_file, 'a')
+        g_sam_file = open(Result_file, 'w')
         cl="Type:"+Type+".G_file:"+G_file+".SA_file:"+SA_file+".Start:"+str(Start)+".End:"+str(End)+".Sam_file:"+Sam_file
         print_sam_title(len(genome),cl)
 
@@ -444,6 +448,10 @@ def Mapping(Type="r",G_file="Acinetobacter_ref.fasta", R_file="ERR776852.fastq",
         
         x,y=load_sam(Sam_file)
         print("Number of read in sam file",len(y))
+        if Start==-1:
+            Start=0
+        if End==-1:
+            End=len(y)
         counter=0
         for i in range(Start,End,1):   
              d=y[i]
@@ -539,16 +547,56 @@ def find_cigar(t_final,p_final):
 
  
 if __name__ == "__main__":
-    Mapping(Type="r",G_file="Acinetobacter_ref.fasta",
-            R_file="ERR776852.fastq",
-            SA_file="bacteria150overlap100.txt",
-            Start=0,End=10)
+    Default_Type="r"
+    Default_G_file="example1.fasta"
+    Default_R_file="Read_example1.fastq"
+    Default_SA_file="example1.fasta.SA.txt"
+    Default_Start=-1
+    Default_End=-1
+    Default_sam_file="example1_bwa.sam"  #sam file generated from BWA 
+    
+    argv = sys.argv[1:]
+    
+    
+    try:
+        opts, args = getopt.getopt(argv,"hrsG:R:S:F:B:E:",["Length=","Genome=","Reads=","SA=","Sam_File=","Begin=","End="])
+    except getopt.GetoptError:
+        print('Mapping.py r -G <Genome_file>  -R <Read_file>  -S <Suffix_array_file>  -B <begining_read>  -E <Ending_read> ')
+        print("or")
+        print('Mapping.py s -G <Genome_file>  -S <Suffix_array_file>  -F <sam_file>  -B <begining_read>  -E <Ending_read> ')
+        sys.exit(2)
+    for opt, arg in opts:
+        if opt == '-h':
+            print("for Mapping read")
+            print('Mapping.py r -G <Genome_file>  -R <Read_file>  -S <Suffix_array_file>  -B <begining_read>  -E <Ending_read> ')
+            print("for Mapping sam file")
+            print('Mapping.py s -G <Genome_file>  -S <Suffix_array_file>  -F <sam_file>  -B <begining_read>  -E <Ending_read> ')
+        
+            sys.exit()
+        elif opt == '-s'::
+            Default_Type="s"
+        elif opt in ("-G", "--Genome"):
+            Default_G_file = arg
+        elif opt in ("-R", "--Reads"):
+            Default_R_file = arg
+        elif opt in ("-S", "--SA"):
+            Default_SA_file = arg
+        elif opt in ("-F", "--Sam_File"):
+            Default_sam_file = arg
+        elif opt in ("-B", "--Begin"):
+            Default_Start = int(arg)
+        elif opt in ("-E", "--End"):
+            Default_End = int(arg)
+        
+   
+    
+    Mapping(Type=Default_Type, G_file=Default_G_file,
+            R_file=Default_R_file,
+            SA_file=Default_SA_file,
+            Start=Default_Start,End=Default_End,
+            Sam_file=Default_sam_file)
 
-    """Mapping(Type="s",G_file="Acinetobacter_ref.fasta",
-            SA_file="bacteria150overlap100.txt",
-            Sam_file="map_lord_52.sam",
-            Start=10,End=100)"""
-
+    
 
     
     
