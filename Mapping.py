@@ -1,5 +1,7 @@
 import numpy as np
 import pandas as pd
+import sys, getopt
+
 
 def load_sam(sam_file):
 # load sam file 
