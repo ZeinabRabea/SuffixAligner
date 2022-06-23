@@ -215,8 +215,11 @@ def Modify_fm_index(bw,ranks,repeat,C,f,LF_Array,t,p):
     while i>0 and bot>=tob:
         Posation_p=[]
         for m in range(tob,bot):
-            if bw[m]==p[i-1]:
+            try:
+              if bw[m]==p[i-1]:
                 Posation_p.append(LF_Array[m])
+            except:
+                nothingg=0 #bw[m] is the last
         if len(Posation_p)!=0:
             tob=Posation_p[0]
             bot=Posation_p[len(Posation_p)-1]+1
@@ -400,8 +403,8 @@ def s_Needle_Man(t_c, p_c,M,UM,G):
     return UM
   
 
-def Mapping(Type="r",G_file="Acinetobacter_ref.fasta", R_file="ERR776852.fastq",
-            SA_file="bacteria150overlap100.txt",Start=0,End=10,Sam_file="map_minimap2_52.sam"):
+def Mapping(Type="r",G_file="Acinetobacter_ref.fasta", R_file=["ERR776852.fastq"],
+            SA_file="bacteria150overlap100.txt",Start=0,End=10,Sam_file=["map_minimap2_52.sam"]):
                
     global g_sam_file  
     global g_bw,g_ranks,g_repeat,g_C,g_f,g_LF_Array,g_S_A,g_t
@@ -421,35 +424,34 @@ def Mapping(Type="r",G_file="Acinetobacter_ref.fasta", R_file="ERR776852.fastq",
     g_LF_Array=LF(g_bw,g_ranks,g_C)
 
     
-
+    
+    y=G_file.split("\\")
+    file=y.pop()    
+    Result_file=file+".sam"
+    g_sam_file = open(Result_file, 'w')
+    cl="command" # need modify
+    print_sam_title(len(genome),cl)
+    
     if Type=="r":
-        Result_file=R_file+"."+str(Start)+"."+str(End)+".sam"
-        g_sam_file = open(Result_file, 'w')
-        cl="Type:"+Type+".G_file:"+G_file+".R_file:"+R_file+".SA_file:"+SA_file+".Start:"+str(Start)+".End:"+str(End)
-        print_sam_title(len(genome),cl)
-
-        g_read,g_read_name,g_read_quality=load_read(R_file)
-        print("Number of read",len(g_read))   
+     for i in range(0,len(R_file)):
+        g_read,g_read_name,g_read_quality=load_read(R_file[i])
+        print("Number of read in file",R_file[i],"=  ",len(g_read))   
         if Start==-1:
             Start=0
         if End==-1:
             End=len(g_read)
         for i in range(Start,End,1)  :
           search_read(i)
-          print("**")
+          #print("**")
     if Type=="s":
-        Result_file=Sam_file+"."+str(Start)+"."+str(End)+".sam"
-        g_sam_file = open(Result_file, 'w')
-        cl="Type:"+Type+".G_file:"+G_file+".SA_file:"+SA_file+".Start:"+str(Start)+".End:"+str(End)+".Sam_file:"+Sam_file
-        print_sam_title(len(genome),cl)
-
+      for i in range(0,len(Sam_file)):
         index=0
         g_read=["ACGT"]
         g_read_name=["n"]
         g_read_quality=["7h8b"]
         
-        x,y=load_sam(Sam_file)
-        print("Number of read in sam file",len(y))
+        x,y=load_sam(Sam_file[i])
+        print("Number of read in sam file",Sam_file[i],"=   ",len(y))
         if Start==-1:
             Start=0
         if End==-1:
@@ -465,8 +467,8 @@ def Mapping(Type="r",G_file="Acinetobacter_ref.fasta", R_file="ERR776852.fastq",
                 g_read[index]=r[9]
                 g_read_quality[index]=r[10]
                 search_read(index)
-                print("**")
-        print("Number of unmapped read in sam file",counter)        
+                #print("**")
+        #print("Number of unmapped read in sam file",counter)        
     g_sam_file.close()
 def print_sam_title(n_of_ref_char,cl):
   t1="@HD"+"  "+"VN:1"+"  "+"SO:unsorted"+"\n"
@@ -551,28 +553,30 @@ def find_cigar(t_final,p_final):
 if __name__ == "__main__":
     Default_Type="r"
     Default_G_file="example1.fasta"
-    Default_R_file="Read_example1.fastq"
-    Default_SA_file="example1.fasta.SA.txt"
+    Default_R_file=[]
+    Default_SA_file=Default_G_file+".SA.txt"
     Default_Start=-1
     Default_End=-1
-    Default_sam_file="example1_bwa.sam"  #sam file generated from BWA 
+    Default_sam_file=[] 
     
     argv = sys.argv[1:]
     
     
     try:
-        opts, args = getopt.getopt(argv,"hrsG:R:S:F:B:E:",["Length=","Genome=","Reads=","SA=","Sam_File=","Begin=","End="])
+        opts, args = getopt.getopt(argv,"hrsG:R:F:B:E:",["Length=","Genome=","Reads=","Sam_File=","Begin=","End="])
     except getopt.GetoptError:
-        print('Mapping.py r -G <Genome_file>  -R <Read_file>  -S <Suffix_array_file>  -B <begining_read>  -E <Ending_read> ')
+        print('Mapping.py r -G <Genome_file>  -R <Read_file>   -B <begining_read>  -E <Ending_read> ')
         print("or")
-        print('Mapping.py s -G <Genome_file>  -S <Suffix_array_file>  -F <sam_file>  -B <begining_read>  -E <Ending_read> ')
+        print('Mapping.py s -G <Genome_file>  -F <sam_file>  -B <begining_read>  -E <Ending_read> ')
         sys.exit(2)
     for opt, arg in opts:
         if opt == '-h':
             print("for Mapping read")
-            print('Mapping.py r -G <Genome_file>  -R <Read_file>  -S <Suffix_array_file>  -B <begining_read>  -E <Ending_read> ')
+            print('Mapping.py r -G <Genome_file>  -R <Read_file>  -B <begining_read>  -E <Ending_read> ')
+            print('Mapping.py r -G <Genome_file>  -R <Read_file>  -R <Read_file2>  -R <Read_file3>  -B <begining_read>  -E <Ending_read> ')
             print("for Mapping sam file")
-            print('Mapping.py s -G <Genome_file>  -S <Suffix_array_file>  -F <sam_file>  -B <begining_read>  -E <Ending_read> ')
+            print('Mapping.py s -G <Genome_file>  -F <sam_file> -B <begining_read>  -E <Ending_read> ')
+            print('Mapping.py s -G <Genome_file>  -F <sam_file> -F <sam_file2> -B <begining_read>  -E <Ending_read> ')
         
             sys.exit()
         elif opt == '-s':
@@ -580,18 +584,18 @@ if __name__ == "__main__":
         elif opt in ("-G", "--Genome"):
             Default_G_file = arg
         elif opt in ("-R", "--Reads"):
-            Default_R_file = arg
-        elif opt in ("-S", "--SA"):
-            Default_SA_file = arg
+            Default_R_file.append(arg)
         elif opt in ("-F", "--Sam_File"):
-            Default_sam_file = arg
+            Default_sam_file.append(arg)
         elif opt in ("-B", "--Begin"):
             Default_Start = int(arg)
         elif opt in ("-E", "--End"):
             Default_End = int(arg)
         
    
-    
+    if Default_R_file==[]:
+        Default_R_file=["Read_example1.fastq"]
+
     Mapping(Type=Default_Type, G_file=Default_G_file,
             R_file=Default_R_file,
             SA_file=Default_SA_file,
