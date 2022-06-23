@@ -20,7 +20,10 @@ def Find_SA_for_Genome(L=100,l=100,G_file='example1.fasta'):
             SA_s[i]=Sorted_2_SA(SA1,SA2,genome,k2=50)
             i=i+1
     
-    x=G_file+".SA.txt"
+    y=G_file.split("\\")
+    filee=y.pop()    
+
+    x=filee+".SA.txt"
     file_sufix_array = open(x, 'w')
     file_sufix_array.write(str(SA_s[0]))
     file_sufix_array.close()
