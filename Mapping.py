@@ -571,11 +571,13 @@ if __name__ == "__main__":
         sys.exit(2)
     for opt, arg in opts:
         if opt == '-h':
-            print("for Mapping read")
+            print("for Mapping read in one file")
             print('Mapping.py r -G <Genome_file>  -R <Read_file>  -B <begining_read>  -E <Ending_read> ')
+            print("for Mapping read in more than one file")
             print('Mapping.py r -G <Genome_file>  -R <Read_file>  -R <Read_file2>  -R <Read_file3>  -B <begining_read>  -E <Ending_read> ')
             print("for Mapping sam file")
             print('Mapping.py s -G <Genome_file>  -F <sam_file> -B <begining_read>  -E <Ending_read> ')
+            print("for Mapping more than one file")
             print('Mapping.py s -G <Genome_file>  -F <sam_file> -F <sam_file2> -B <begining_read>  -E <Ending_read> ')
         
             sys.exit()
