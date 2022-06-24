@@ -1,4 +1,5 @@
 import sys, getopt
+import os
 def Find_SA_for_Genome(L=100,l=100,G_file='example1.fasta'):    
 #Input:  G_file: Reference Genome File,  L: Divide genome to substrings of length L,   l : Overlap length.
 #Output:   suffix:Suffix Array
@@ -19,11 +20,9 @@ def Find_SA_for_Genome(L=100,l=100,G_file='example1.fasta'):
             SA_s.remove(SA1)      
             SA_s[i]=Sorted_2_SA(SA1,SA2,genome,k2=50)
             i=i+1
-    
-    y=G_file.split("\\")
-    filee=y.pop()    
-
-    x=filee+".SA.txt"
+     
+    head_tail = os.path.split(G_file)
+    x=head_tail[1]+".SA.txt"
     file_sufix_array = open(x, 'w')
     file_sufix_array.write(str(SA_s[0]))
     file_sufix_array.close()
