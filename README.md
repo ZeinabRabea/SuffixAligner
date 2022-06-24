@@ -25,45 +25,29 @@ Copyright (C) 2020-2022, and GNU GPL, by Zeinab Rabea, Sara El-Metwally,Samir El
 ```
 
 #### Notes:
-- The output of Indexing stage is a suffix array file named with the ` Genome_prefix_file_name].SA.txt `.
+- The output of Indexing stage is a suffix array file named with the ` [Genome_prefix_file_name].SA.txt `.
 - If you did not specify any parameters, SuffixAligner will invoke its default parameters setting with the default reference genome file `example1.fasta` 
 
 
-## Mapping:
+### Mapping:
+#### Case 1: Dealing with Sequencing Reads Files 
 
-#### Run
+``` python Mapping.py  -T [r] -G [Genome_file]  -R [Read_File_1]  -R [Read_File_2]  -R [Read_File_3]  -B [Begining_Read_Index]  -E [Ending_Read_Index] -O [Output_File_Prefix]```
 
-1.	Run `python Mapping.py  -T r -G <Genome_file>  -R <Read_file>   -B <begining_read>  -E <Ending_read> -O <Output_file>`.
-2.	Or run `python Mapping.py  -T r -G <Genome_file>  -R <Read_file>  -R <Read_file2>  -R <Read_file3>  -B <begining_read>  -E <Ending_read> -O <Output_file>`.
-3.	Or run `python Mapping.py  -T s -G <Genome_file>  -F <sam_file>  -B <begining_read>  -E <Ending_read> -O <Output_file>`.
-4.	Or run `python Mapping.py  -T s -G <Genome_file>  -F <sam_file> -F <sam_file2> -B <begining_read>   -E <Ending_read> -O <Output_file>`.
-5.	Or run `python Mapping.py  -T r --Genome <Genome_file>  --Reads <Read_file>   --Begin <begining_read>  --End <Ending_read> --Output <Output_file>`.
-6.	Or run `python Mapping.py  -T s --Genome <Genome_file> --Sam_File <sam_file>  --Begin <begining_read>  --End <Ending_read> --Output <Output_file>`.
-7.	Or run `python Mapping.py  -T r -G <Genome_file>  -R <Read_file>`.
-8.	Or run `python Mapping.py  -T s -G <Genome_file>  -F <sam_file>`.
-9.	Or run `python Mapping.py`.
-10.	Or run `python Mapping.py -h`.
+#### Case 2: Resolve unmapped reads by dealing with SAM Files produced by other Aligners
 
+``` python Mapping.py  -T [s] -G [Genome_file]  -F [SAM_File_1]  -F [SAM_File_2]  -F [SAM_File_3]  -B [Begining_Read_Index]  -E [Ending_Read_Index] -O [Output_File_Prefix]```
 
-
-        *[-T] take "r" align reads to genome 
-        take "s" align Unmapped reads from sam file to genome     [default:r] 
-        
-        *[-G, --Genome] Reference Genome File                    [default:example1.fasta]
-        *[-R, --Reads] Read File                                [default: Read_example1.fastq]
-        *[-B, --Begin] Starting read number                     [default:0]
-        *[-E, --End] Ending Read number                          [default:all number of read ] 
-        *[-F, --Sam_File] Sam file which generated from other aligner  
-        *[-O, --Output] Name of Sam file                         [default: <Genome_file>.sam]
-
-
-
-
-# Notes
-
-,,,,,,,,,,,,,,,,
-
-
+``` 
+* [-T] Type of the input files (i.e. r for Reads, s for SAM)                                     [default: r]
+* [-G or --Genome ] Reference Genome File                                                        [default: example1.fasta]
+* [-R, --Reads] Sequencing Read files, each file is specified with -R option.                    [default: Read_example1.fastq]
+* [-B, --Begin] Starting Read Index in the case if you are dealing with a small subset of reads. [default:0]
+* [-E, --End] Ending Read Index in the case if you are dealing with a small subset of reads.     [default:All Reads is used] 
+* [-F, --Sam_File] SAM files, each file is specified with -F option. 
+* [-O, --Output] Prefix name of the output SAM file produced by SuffixAligner                    [default: <Genome_file>.sam]
+* [-h] Help
+```
 
 # Read files
 SuffixAligner align sequencing reads given in fastq format to reference genome given in fasta format. Also, SuffixAligner can read directly the sam files given in sam format which genertated from other aligner and search for solution for unmapped read.
