@@ -1,6 +1,7 @@
 import numpy as np
 import pandas as pd
 import sys, getopt
+import os
 
 
 def load_sam(sam_file):
@@ -423,11 +424,8 @@ def Mapping(Type="r",G_file="Acinetobacter_ref.fasta", R_file=["ERR776852.fastq"
     g_f=firstCol(g_repeat)
     g_LF_Array=LF(g_bw,g_ranks,g_C)
 
-    
-    
-    y=G_file.split("\\")
-    file=y.pop()    
-    Result_file=file+".sam"
+    head_tail = os.path.split(G_file)
+    Result_file=head_tail[1]+".sam"
     g_sam_file = open(Result_file, 'w')
     cl="command" # need modify
     print_sam_title(len(genome),cl)
@@ -468,7 +466,7 @@ def Mapping(Type="r",G_file="Acinetobacter_ref.fasta", R_file=["ERR776852.fastq"
                 g_read_quality[index]=r[10]
                 search_read(index)
                 #print("**")
-        #print("Number of unmapped read in sam file",counter)        
+        print("Number of unmapped read in sam file",counter)        
     g_sam_file.close()
 def print_sam_title(n_of_ref_char,cl):
   t1="@HD"+"  "+"VN:1"+"  "+"SO:unsorted"+"\n"
@@ -563,7 +561,7 @@ if __name__ == "__main__":
     
     
     try:
-        opts, args = getopt.getopt(argv,"hrsG:R:F:B:E:",["Length=","Genome=","Reads=","Sam_File=","Begin=","End="])
+        opts, args = getopt.getopt(argv,"hrsG:R:F:B:E:",["Genome=","Reads=","Sam_File=","Begin=","End="])
     except getopt.GetoptError:
         print('Mapping.py r -G <Genome_file>  -R <Read_file>   -B <begining_read>  -E <Ending_read> ')
         print("or")
