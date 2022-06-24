@@ -39,13 +39,13 @@ Copyright (C) 2020-2022, and GNU GPL, by Zeinab Rabea, Sara El-Metwally,Samir El
 ``` python Mapping.py  -T [s] -G [Genome_file]  -F [SAM_File_1]  -F [SAM_File_2]  -F [SAM_File_3]  -B [Begining_Read_Index]  -E [Ending_Read_Index] -O [Output_File_Prefix]```
 
 ``` 
-* [-T] Type of the input files (i.e. r for Reads, s for SAM)                                     [default: r]
-* [-G or --Genome ] Reference Genome File                                                        [default: example1.fasta]
-* [-R, --Reads] Sequencing Read files, each file is specified with -R option.                    [default: Read_example1.fastq]
-* [-B, --Begin] Starting Read Index in the case if you are dealing with a small subset of reads. [default:0]
-* [-E, --End] Ending Read Index in the case if you are dealing with a small subset of reads.     [default:All Reads is used] 
+* [-T] Type of the input files (i.e. r for Reads, s for SAM)                                    [default: r]
+* [-G or --Genome ] Reference Genome File                                                       [default: example1.fasta]
+* [-R, --Reads] Sequencing Read files, each file is specified with -R option.                   [default: Read_example1.fastq]
+* [-B, --Begin] Starting Read Index in the case if you are dealing with a small subset of reads.[default:0]
+* [-E, --End] Ending Read Index in the case if you are dealing with a small subset of reads.    [default:All Reads is used] 
 * [-F, --Sam_File] SAM files, each file is specified with -F option. 
-* [-O, --Output] Prefix name of the output SAM file produced by SuffixAligner                    [default: <Genome_file>.sam]
+* [-O, --Output] Prefix name of the output SAM file produced by SuffixAligner                   [default: <Genome_file>.sam]
 * [-h] Help
 ```
 
