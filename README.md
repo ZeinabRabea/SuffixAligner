@@ -24,8 +24,9 @@ Copyright (C) 2020-2022, and GNU GPL, by Zeinab Rabea, Sara El-Metwally,Samir El
 * [-h]              Help
 ```
 
-#### The output
-<Genome_file>.SA.txt         the suffix array in string format
+#### Notes:
+- The output of Indexing stage is a suffix array file named with the ` Genome_prefix_file_name].SA.txt `.
+- If you did not specify any parameters, SuffixAligner will invoke its default parameters setting with the default reference genome file `example1.fasta` 
 
 
 ## Mapping:
