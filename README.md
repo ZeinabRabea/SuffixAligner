@@ -15,7 +15,7 @@ Copyright (C) 2020-2022, and GNU GPL, by Zeinab Rabea, Sara El-Metwally,Samir El
 2. For Indexing step,run `python Indexing.py -h` in the repo directory. 
 3. For Mapping step,run `python Mapping.py -h` in the repo directory. 
 
-### Genome Indexing Stage: 
+## Genome Indexing Stage: 
 
 ``` python Indexing.py -L [Substrings_Length] -G [Genome_file] ```
 ``` 
@@ -29,12 +29,12 @@ Copyright (C) 2020-2022, and GNU GPL, by Zeinab Rabea, Sara El-Metwally,Samir El
 - If you did not specify any parameters, SuffixAligner will invoke its default parameters setting with the default reference genome file `example1.fasta` 
 
 
-### Mapping:
-#### Case 1: Dealing with Sequencing Reads Files 
+## Mapping:
+### Case 1: Dealing with Sequencing Reads Files 
 
 ``` python Mapping.py  -T [r] -G [Genome_file]  -R [Read_File_1]  -R [Read_File_2]  -R [Read_File_3]  -B [Begining_Read_Index]  -E [Ending_Read_Index] -O [Output_File_Prefix]```
 
-#### Case 2: Resolve unmapped reads by dealing with SAM Files produced by other Aligners
+### Case 2: Resolve unmapped reads by dealing with SAM Files produced by other Aligners
 
 ``` python Mapping.py  -T [s] -G [Genome_file]  -F [SAM_File_1]  -F [SAM_File_2]  -F [SAM_File_3]  -B [Begining_Read_Index]  -E [Ending_Read_Index] -O [Output_File_Prefix]```
 
@@ -48,29 +48,13 @@ Copyright (C) 2020-2022, and GNU GPL, by Zeinab Rabea, Sara El-Metwally,Samir El
 * [-O, --Output] Prefix name of the output SAM file produced by SuffixAligner [default: <Genome_File_Prefix>.sam]
 * [-h] Help
 ```
-
-# Read files
-SuffixAligner align sequencing reads given in fastq format to reference genome given in fasta format. Also, SuffixAligner can read directly the sam files given in sam format which genertated from other aligner and search for solution for unmapped read.
-# Outputs
-The output of SuffixAligner is suffix array in text format from the step of indexing in the file:
-
-            <Genome_file>.SA.txt
-
-The output of the step of mapping is sam file in the file:
-
-            <Genome_file>.sam     
-            Or
-            <Output_file>.sam 
-
-
-SuffixAligner also reports the following on the screen:
-
-•	Genome length
-
-•	Number of read
-
-•	Number of read in sam file
-
-•	Number of unmapped read in sam file
+#### Notes:
+- Starting and Ending Reads Indicies are used when you are interested in a small subset of reads and the indicies are corresponding to the reads positions in the sequencing files.
+- The default parameters setting of the SuffixAligner is considering the whole set of sequencing data. 
+- The SAM option is used when you would like to improve the number of mapping reads produced by the other aligners.   
+- SuffixAligner also reports the following on the screen:
+        1. Genome length
+        2. Number of Sequencing Reads in both cases (i.e. reading sequencing data or SAM files) 
+        3. Number of unmapped Reads in the SAM files
 
 
