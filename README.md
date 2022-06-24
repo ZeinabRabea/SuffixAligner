@@ -12,8 +12,8 @@ Copyright (C) 2020-2022, and GNU GPL, by Zeinab Rabea, Sara El-Metwally,Samir El
 
 ### Quick usage guide
 1. Clone the [GitHub repo](https://github.com/ZeinabRabea/SuffixAligner), e.g. with `git clone https://github.com/ZeinabRabea/SuffixAligner.git`
-2. For Indexing step,run `python Indexing.py` in the repo directory. 
-3. For Mapping step,run `python Mapping.py` in the repo directory. 
+2. For Indexing step,run `python Indexing.py -h` in the repo directory. 
+3. For Mapping step,run `python Mapping.py -h` in the repo directory. 
 
 ### Genome Indexing Stage: 
 1. Run `python Indexing.py` in the repo directory.
