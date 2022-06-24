@@ -65,19 +65,15 @@ Copyright (C) 2020-2022, and GNU GPL, by Zeinab Rabea, Sara El-Metwally,Samir El
 
 
 # Notes
+## Read files
+SuffixAligner align sequencing reads given in fastq format to reference genome given in fasta format. The read may be in one file or multiple file. Also, SuffixAligner can read directly the sam files given in sam format which genertated from other aligner and search for solution for unmapped read. SuffixAligner can read multiple sam file.
+## Outputs 
 
-,,,,,,,,,,,,,,,,
-
-
-
-# Read files
-SuffixAligner align sequencing reads given in fastq format to reference genome given in fasta format. Also, SuffixAligner can read directly the sam files given in sam format which genertated from other aligner and search for solution for unmapped read.
-# Outputs
-The output of SuffixAligner is suffix array in text format from the step of indexing in the file:
+The output of SuffixAligner is suffix array in text format. The Output for the step of indexing save in directory in the file:
 
             <Genome_file>.SA.txt
 
-The output of the step of mapping is sam file in the file:
+The output of the step of mapping is sam file save in directory in the file:
 
             <Genome_file>.sam     
             Or
