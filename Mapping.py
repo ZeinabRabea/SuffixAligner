@@ -552,7 +552,6 @@ if __name__ == "__main__":
     Default_Type="r"
     Default_G_file="example1.fasta"
     Default_R_file=[]
-    Default_SA_file=Default_G_file+".SA.txt"
     Default_Start=-1
     Default_End=-1
     Default_sam_file=[] 
@@ -595,7 +594,8 @@ if __name__ == "__main__":
    
     if Default_R_file==[]:
         Default_R_file=["Read_example1.fastq"]
-
+        
+    Default_SA_file=Default_G_file+".SA.txt"
     Mapping(Type=Default_Type, G_file=Default_G_file,
             R_file=Default_R_file,
             SA_file=Default_SA_file,
