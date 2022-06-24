@@ -53,8 +53,8 @@ Copyright (C) 2020-2022, and GNU GPL, by Zeinab Rabea, Sara El-Metwally,Samir El
 - The default parameters setting of the SuffixAligner is considering the whole set of sequencing data. 
 - The SAM option is used when you would like to improve the number of mapping reads produced by the other aligners.   
 - SuffixAligner also reports the following on the screen: <br>
-        1. Genome length
-        2. Number of Sequencing Reads in both cases (i.e. reading sequencing data or SAM files) 
+        1. Genome length <br>
+        2. Number of Sequencing Reads in both cases (i.e. reading sequencing data or SAM files) <br> 
         3. Number of unmapped Reads in the SAM files
 
 
