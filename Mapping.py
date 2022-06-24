@@ -2,6 +2,7 @@ import numpy as np
 import pandas as pd
 import sys, getopt
 import os
+import random
 
 
 def load_sam(sam_file):
@@ -123,8 +124,13 @@ def reverse_read(x):
         if x[-1-i]=='T':
             y=y+ 'A'
   return y
-
+def remove_N(r):
+    r=r.upper()
+    r=r.replace('N',random.choice("ACTG"))
+    return r
+ 
 def search_read(i):
+        g_read[i]=remove_N(g_read[i])
         x,y=Find_matched_seeds(g_bw,g_ranks,g_repeat,g_C,g_f,g_LF_Array,g_S_A,g_t,g_read[i])
 
         if y==True:
