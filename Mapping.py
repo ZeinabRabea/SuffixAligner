@@ -405,7 +405,7 @@ def s_Needle_Man(t_c, p_c,M,UM,G):
   
 
 def Mapping(Type="r",G_file="Acinetobacter_ref.fasta", R_file=["ERR776852.fastq"],
-            SA_file="bacteria150overlap100.txt",Start=0,End=10,Sam_file=["map_minimap2_52.sam"]):
+            SA_file="bacteria150overlap100.txt",Start=0,End=10,Sam_file=["map_minimap2_52.sam"],Output_file="x_output.sam"):
                
     global g_sam_file  
     global g_bw,g_ranks,g_repeat,g_C,g_f,g_LF_Array,g_S_A,g_t
@@ -424,9 +424,8 @@ def Mapping(Type="r",G_file="Acinetobacter_ref.fasta", R_file=["ERR776852.fastq"
     g_f=firstCol(g_repeat)
     g_LF_Array=LF(g_bw,g_ranks,g_C)
 
-    head_tail = os.path.split(G_file)
-    Result_file=head_tail[1]+".sam"
-    g_sam_file = open(Result_file, 'w')
+    
+    g_sam_file = open(Output_file, 'w')
     cl="command" # need modify
     print_sam_title(len(genome),cl)
     
@@ -555,31 +554,31 @@ if __name__ == "__main__":
     Default_Start=-1
     Default_End=-1
     Default_sam_file=[] 
-    
+    Default_Output=""
     argv = sys.argv[1:]
     
     
     try:
-        opts, args = getopt.getopt(argv,"hrsG:R:F:B:E:",["Genome=","Reads=","Sam_File=","Begin=","End="])
+        opts, args = getopt.getopt(argv,"hT:G:R:F:B:E:O:",["Type=","Genome=","Reads=","Sam_File=","Begin=","End=","Output="])
     except getopt.GetoptError:
-        print('Mapping.py r -G <Genome_file>  -R <Read_file>   -B <begining_read>  -E <Ending_read> ')
+        print('Mapping.py -T r -G <Genome_file>  -R <Read_file>   -B <begining_read>  -E <Ending_read> -O <Output_file>')
         print("or")
-        print('Mapping.py s -G <Genome_file>  -F <sam_file>  -B <begining_read>  -E <Ending_read> ')
+        print('Mapping.py -T s -G <Genome_file>  -F <sam_file>  -B <begining_read>  -E <Ending_read> -O <Output_file>')
         sys.exit(2)
     for opt, arg in opts:
         if opt == '-h':
             print("for Mapping read in one file")
-            print('Mapping.py r -G <Genome_file>  -R <Read_file>  -B <begining_read>  -E <Ending_read> ')
+            print('Mapping.py -T r -G <Genome_file>  -R <Read_file>  -B <begining_read>  -E <Ending_read> -O <Output_file>')
             print("for Mapping read in more than one file")
-            print('Mapping.py r -G <Genome_file>  -R <Read_file>  -R <Read_file2>  -R <Read_file3>  -B <begining_read>  -E <Ending_read> ')
+            print('Mapping.py -T r -G <Genome_file>  -R <Read_file>  -R <Read_file2>  -R <Read_file3>  -B <begining_read>  -E <Ending_read> -O <Output_file>')
             print("for Mapping sam file")
-            print('Mapping.py s -G <Genome_file>  -F <sam_file> -B <begining_read>  -E <Ending_read> ')
+            print('Mapping.py -T s -G <Genome_file>  -F <sam_file> -B <begining_read>  -E <Ending_read> -O <Output_file>')
             print("for Mapping more than one file")
-            print('Mapping.py s -G <Genome_file>  -F <sam_file> -F <sam_file2> -B <begining_read>  -E <Ending_read> ')
+            print('Mapping.py -T s -G <Genome_file>  -F <sam_file> -F <sam_file2> -B <begining_read>  -E <Ending_read> -O <Output_file>')
         
             sys.exit()
-        elif opt == '-s':
-            Default_Type="s"
+        elif opt in ("-T", "--Type"):
+            Default_Type=arg
         elif opt in ("-G", "--Genome"):
             Default_G_file = arg
         elif opt in ("-R", "--Reads"):
@@ -590,8 +589,15 @@ if __name__ == "__main__":
             Default_Start = int(arg)
         elif opt in ("-E", "--End"):
             Default_End = int(arg)
+        elif opt in ("-O", "--Output"):
+            Default_Output = arg
+    
+         
+    if Default_Output=="":
+        head_tail = os.path.split(Default_G_file)
+        Default_Output=head_tail[1]+".sam"
         
-   
+
     if Default_R_file==[]:
         Default_R_file=["Read_example1.fastq"]
         
@@ -600,7 +606,7 @@ if __name__ == "__main__":
             R_file=Default_R_file,
             SA_file=Default_SA_file,
             Start=Default_Start,End=Default_End,
-            Sam_file=Default_sam_file)
+            Sam_file=Default_sam_file,Output_file=Default_Output)
 
     
 
