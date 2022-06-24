@@ -52,7 +52,7 @@ Copyright (C) 2020-2022, and GNU GPL, by Zeinab Rabea, Sara El-Metwally,Samir El
 - Starting and Ending Reads Indicies are used when you are interested in a small subset of reads and the indicies are corresponding to the reads positions in the sequencing files.
 - The default parameters setting of the SuffixAligner is considering the whole set of sequencing data. 
 - The SAM option is used when you would like to improve the number of mapping reads produced by the other aligners.   
-- SuffixAligner also reports the following on the screen:
+- SuffixAligner also reports the following on the screen: <br>
         1. Genome length
         2. Number of Sequencing Reads in both cases (i.e. reading sequencing data or SAM files) 
         3. Number of unmapped Reads in the SAM files
