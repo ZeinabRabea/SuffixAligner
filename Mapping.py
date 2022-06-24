@@ -237,14 +237,20 @@ def Modify_fm_index2 (bw,ranks,repeat,C,f,LF_Array,sss,t,p):
     ll,index_true=Modify_fm_index(bw,ranks,repeat,C,f,LF_Array,t,p)
     if index_true==-1:
         for m in range(0,len(ll)):
+          try:
             y=ll[m]
-            ss.append(sss[y])      
+            ss.append(sss[y])
+          except:  
+            nothingg=0     
     else:
         index_first=index_true
         ll,index_true=Modify_fm_index(bw,ranks,repeat,C,f,LF_Array,t,p[index_true:index_last])
         for m in range(0,len(ll)):
+          try:
             y=ll[m]
             ss.append(sss[y])
+          except:
+            nothingg=0
     return ss,index_first,index_last
 
 def det_window(t,p,x):
