@@ -16,58 +16,51 @@ Copyright (C) 2020-2022, and GNU GPL, by Zeinab Rabea, Sara El-Metwally,Samir El
 3. For Mapping step,run `python Mapping.py -h` in the repo directory. 
 
 ### Genome Indexing Stage: 
-1. Run `python Indexing.py` in the repo directory.
 
-#### Run
-Find_SA_for_Genome(L=100,l=100,G_file='genome_file.fasta')    
-#### Or Run
-Find_SA_for_Genome()
-
-
-            *[G_file] Reference Genome File     	                  [default:example1.fasta]
-
-            *[L] Divide genome to substrings of length L     	      [default:100]
-
-            *[l] Overlap length                              	      [default:100]
+1.	Run `python Indexing.py -L <Substrings_Length> -G <Genome_file> -G <Genome_file>`.
+2.	Or run `python Indexing.py -G <Genome_file>`.
+3.	Or run `python Indexing.py --Length <Substrings_Length> --Genome <Genome_file>`.
+4.	Or run `python Indexing.py --Genome <Genome_file>`.
+5.	Or run `python Indexing.py` in the repo directory.
+6.	Or run `python Indexing.py -h`    
 
 
-#### output
-[G_file].SA.txt     the suffix array in string format 
+        *[-L, --Length] Divide genome to substrings of length L   [default:100]
+        *[-G, --Genome] Reference Genome File                     [default:example1.fasta]
+        *[-h] for help
+
+
+#### The output
+<Genome_file>.SA.txt         the suffix array in string format
 
 
 ## Mapping:
 
 #### Run
 
-Mapping(Type="r",G_file="example1.fasta",
-            R_file="Read1.fastq",
-            SA_file="example1.fasta.SA.txt",
-            Start=0,End=10)     
-#### Or run
-
-Mapping(Type="s",G_file=" example1.fasta",
-            SA_file="example1.fasta.SA.txt",
-            Sam_file="example1.bwa.sam",
-            Start=0,End=10)
-
-#### Or Run
-
-Mapping()
+1.	Run `python Mapping.py  -T r -G <Genome_file>  -R <Read_file>   -B <begining_read>  -E <Ending_read> -O <Output_file>`.
+2.	Or run `python Mapping.py  -T r -G <Genome_file>  -R <Read_file>  -R <Read_file2>  -R <Read_file3>  -B <begining_read>  -E <Ending_read> -O <Output_file>`.
+3.	Or run `python Mapping.py  -T s -G <Genome_file>  -F <sam_file>  -B <begining_read>  -E <Ending_read> -O <Output_file>`.
+4.	Or run `python Mapping.py  -T s -G <Genome_file>  -F <sam_file> -F <sam_file2> -B <begining_read>   -E <Ending_read> -O <Output_file>`.
+5.	Or run `python Mapping.py  -T r --Genome <Genome_file>  --Reads <Read_file>   --Begin <begining_read>  --End <Ending_read> --Output <Output_file>`.
+6.	Or run `python Mapping.py  -T s --Genome <Genome_file> --Sam_File <sam_file>  --Begin <begining_read>  --End <Ending_read> --Output <Output_file>`.
+7.	Or run `python Mapping.py  -T r -G <Genome_file>  -R <Read_file>`.
+8.	Or run `python Mapping.py  -T s -G <Genome_file>  -F <sam_file>`.
+9.	Or run `python Mapping.py`.
+10.	Or run `python Mapping.py -h`.
 
 
-            *[Type] "r" for read, "s" for sam file             [default:r]       
 
-            *[G_file] Reference Genome File                    [default:example1.fasta]
+        *[-T] take "r" align reads to genome 
+        take "s" align Unmapped reads from sam file to genome     [default:r] 
+        
+        *[-G, --Genome] Reference Genome File                    [default:example1.fasta]
+        *[-R, --Reads] Read File                                [default: Read_example1.fastq]
+        *[-B, --Begin] Starting read number                     [default:0]
+        *[-E, --End] Ending Read number                          [default:all number of read ] 
+        *[-F, --Sam_File] Sam file which generated from other aligner  
+        *[-O, --Output] Name of Sam file                         [default: <Genome_file>.sam]
 
-            *[R_file] Read File                                [default:example1.fasta]
-
-            *[SA_file] Suffix array File                       [default:example1.fasta]
-
-            *[Start] read number which Start from              [default:0]
-
-            *[End] number of read which end with               [default:10] 
-
-            *[Sam_file] Sam file which generated from other aligner  
 
 
 
@@ -82,15 +75,13 @@ SuffixAligner align sequencing reads given in fastq format to reference genome g
 # Outputs
 The output of SuffixAligner is suffix array in text format from the step of indexing in the file:
 
-            [G_file].SA.txt
+            <Genome_file>.SA.txt
 
 The output of the step of mapping is sam file in the file:
 
-            [R_file].[Start].[End].sam      when input is read file
-
-#### Or
-
-            [Sam_file].[Start].[End].sam      when input is sam file
+            <Genome_file>.sam     
+            Or
+            <Output_file>.sam 
 
 
 SuffixAligner also reports the following on the screen:
