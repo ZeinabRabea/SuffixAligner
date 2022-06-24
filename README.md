@@ -17,18 +17,12 @@ Copyright (C) 2020-2022, and GNU GPL, by Zeinab Rabea, Sara El-Metwally,Samir El
 
 ### Genome Indexing Stage: 
 
-1.	Run `python Indexing.py -L <Substrings_Length> -G <Genome_file> -G <Genome_file>`.
-2.	Or run `python Indexing.py -G <Genome_file>`.
-3.	Or run `python Indexing.py --Length <Substrings_Length> --Genome <Genome_file>`.
-4.	Or run `python Indexing.py --Genome <Genome_file>`.
-5.	Or run `python Indexing.py` in the repo directory.
-6.	Or run `python Indexing.py -h`    
-
-
-        *[-L, --Length] Divide genome to substrings of length L   [default:100]
-        *[-G, --Genome] Reference Genome File                     [default:example1.fasta]
-        *[-h] for help
-
+``` python Indexing.py -L [Substrings_Length] -G [Genome_file] ```
+``` 
+* [-L or --Length ] Divide genome to substrings of length L             [default: 100]
+* [-G or --Genome ] Reference Genome File                               [default: example1.fasta]
+* [-h]              Help
+```
 
 #### The output
 <Genome_file>.SA.txt         the suffix array in string format
@@ -65,15 +59,19 @@ Copyright (C) 2020-2022, and GNU GPL, by Zeinab Rabea, Sara El-Metwally,Samir El
 
 
 # Notes
-## Read files
-SuffixAligner align sequencing reads given in fastq format to reference genome given in fasta format. The read may be in one file or multiple file. Also, SuffixAligner can read directly the sam files given in sam format which genertated from other aligner and search for solution for unmapped read. SuffixAligner can read multiple sam file.
-## Outputs 
 
-The output of SuffixAligner is suffix array in text format. The Output for the step of indexing save in directory in the file:
+,,,,,,,,,,,,,,,,
+
+
+
+# Read files
+SuffixAligner align sequencing reads given in fastq format to reference genome given in fasta format. Also, SuffixAligner can read directly the sam files given in sam format which genertated from other aligner and search for solution for unmapped read.
+# Outputs
+The output of SuffixAligner is suffix array in text format from the step of indexing in the file:
 
             <Genome_file>.SA.txt
 
-The output of the step of mapping is sam file save in directory in the file:
+The output of the step of mapping is sam file in the file:
 
             <Genome_file>.sam     
             Or
