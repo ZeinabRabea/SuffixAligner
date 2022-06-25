@@ -55,6 +55,6 @@ Copyright (C) 2020-2022, and GNU GPL, by Zeinab Rabea, Sara El-Metwally,Samir El
 - SuffixAligner also reports the following on the screen: <br>
         * Genome length. <br>
         * Number of Sequencing Reads in both cases (i.e. reading sequencing data or SAM files). <br> 
-        * Number of unmapped Reads in the SAM files.
+        * Number of unmapped Reads in the SAM files produced by the other aligners.
 
 
