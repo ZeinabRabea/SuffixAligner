@@ -140,7 +140,7 @@ def search_read(i):
             print(y[0])
             score=y[0]
             CIGAR_XX=str(len(g_read[i]))+"M"
-            print_sam_element(g_read_name[i],flag,g_ref_title,find_in_pos,score,CIGAR_XX,g_read[i],"q")
+            print_sam_element(g_read_name[i],flag,g_ref_title,find_in_pos,255,CIGAR_XX,g_read[i],"q")
             
         elif x==[]:
             search_read_reverse(i)
@@ -169,7 +169,7 @@ def search_read_reverse(i):
             print(y[0])
             score=y[0]
             CIGAR_XX=str(len(g_read[i]))+"M"
-            print_sam_element(g_read_name[i],flag,g_ref_title,find_in_pos,score,CIGAR_XX,g_read[i],"q")
+            print_sam_element(g_read_name[i],flag,g_ref_title,find_in_pos,255,CIGAR_XX,g_read[i],"q")
             
         elif x==[]:
             flag=4
@@ -495,17 +495,22 @@ def print_sam_element(r_n,flag_XX,ref_named,find_in_pos,score,CIGAR_XX,readd,qua
 
 
 def Find_score(t_final,p_final):
-#find score for sam file Match =1, unmatch=-1, gap=-1
+#find score for sam file Match =1, unmatch=-1, gap=-1 and return the mapq
     score=0
     mi=min(len(p_final),len(t_final))
     for i in range(0,mi):
         if t_final[i]==p_final[i]:
             score+=1
-        elif t_final[i]=='-' or p_final[i]=='-':
-            score-=1
+        #elif t_final[i]=='-' or p_final[i]=='-':
+        #    score-=1
         else :
             score-=1
-    return score
+    if int(score)/len(p_final)< 0.15:
+            return 60
+    else:
+            x=round( 60 +5* (0.2 - (-1*int(score)/len(p_final))) / 0.2)
+            return min (x,255)
+    return 0
 
 def find_cigar(t_final,p_final):
 #find cigar for sam file
