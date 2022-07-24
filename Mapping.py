@@ -438,7 +438,7 @@ def Mapping(Type="r",G_file="Acinetobacter_ref.fasta", R_file=["ERR776852.fastq"
 
     
     g_sam_file = open(Output_file, 'w')
-    cl="command" # need modify
+    #cl="command" # need modify
     print_sam_title(len(genome),cl)
     
     if Type=="r":
@@ -573,10 +573,16 @@ if __name__ == "__main__":
     Default_sam_file=[] 
     Default_Output=""
     argv = sys.argv[1:]
+    global cl
+    cl=""
+    
     
     
     try:
+        cl="python Mapping.py"
         opts, args = getopt.getopt(argv,"hT:G:R:F:B:E:O:",["Type=","Genome=","Reads=","Sam_File=","Begin=","End=","Output="])
+        for z in opts :
+            cl+=str(z[0])+" "+str(z[1])+" "
     except getopt.GetoptError:
         print('Mapping.py -T r -G <Genome_file>  -R <Read_file>   -B <begining_read>  -E <Ending_read> -O <Output_file>')
         print("or")
@@ -619,6 +625,9 @@ if __name__ == "__main__":
         Default_R_file=["Read_example1.fastq"]
         
     Default_SA_file=Default_G_file+".SA.txt"
+    if cl=="":
+        cl="Mapping(Type="+Default_Type+", G_file="+Default_G_file+",SA_file="+Default_SA_file+",Start="+Default_Start+",End="+Default_End+",Sam_file="+Default_sam_file+",Output_file="+Default_Output+")"
+      
     Mapping(Type=Default_Type, G_file=Default_G_file,
             R_file=Default_R_file,
             SA_file=Default_SA_file,
